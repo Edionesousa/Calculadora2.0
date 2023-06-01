@@ -9,20 +9,68 @@ class calculator {
         this.currentOperation = "";
     }
 
+    //add digit to calculator screen
+    addDigit(digit){
+
+        // check if current operation already has a dot
+        if(digit ==="." && this.currentOperationText.innerText.includes(".")){
+            return;
+        }
+        this.currentOperation = digit;
+        this.updateScreen();
+    }
+    // precess all calculator operation
+    processOperation(operation){
+        let operationValue
+        const previous =+ this.previousOperationText.innerText.split(" ")[0];
+        const current =+ this.currentOperationText.innerText
+    
+        switch(operation){
+            case "+":
+                operationValue = previous + current;
+                this.updateScreen(operationValue, operation, current, previous)
+            break;
+            default:
+            return;
+        }
+
+
+    }
+    // change values of the calculator screen
+    updateScreen(
+        operationValue = null,
+        operation = null,
+        current = null,
+        previous = null
+    ){
+
+        console.log(operationValue, opretion, current, previous)
+
+        if(operationValue === null){
+            this.currentOperationText.innerText += this.currentOperation;
+        }else{
+            // check if value is zero, if it just add current value.
+            if(previous === 0){
+                operationValue = current;
+            }
+
+            //add current value to previous
+            this.previousOperationText.innerText = `${operationValue} ${operation}`
+            this.currentOperationText = "";
+
+        }
+    }
 }
-
-const calc = (previousOperationText, currentOperationText)
-
-console.log(calc)
+const calc = new calculator (previousOperationText, currentOperationText);
 
 buttons.forEach((btn) =>{
     btn.addEventListener("click", (e) =>{
         const value = e.target.innerText;
 
         if(+value >= 0 || value === "."){
-            console.log(value);
+            calc.addDigit(value);
         }else{
-            console.log("OP +", value);
+            calc.processOperation(value);
         }
     })
 })
