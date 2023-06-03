@@ -30,6 +30,18 @@ class calculator {
                 operationValue = previous + current;
                 this.updateScreen(operationValue, operation, current, previous)
             break;
+            case "-":
+                operationValue = previous - current;
+                this.updateScreen(operationValue, operation, current, previous)
+            break;
+            case "/":
+                operationValue = previous / current;
+                this.updateScreen(operationValue, operation, current, previous)
+            break;
+            case "*":
+                operationValue = previous * current;
+                this.updateScreen(operationValue, operation, current, previous)
+            break;
             default:
             return;
         }
@@ -44,7 +56,7 @@ class calculator {
         previous = null
     ){
 
-        console.log(operationValue, opretion, current, previous)
+        console.log(operationValue, operation, current, previous)
 
         if(operationValue === null){
             this.currentOperationText.innerText += this.currentOperation;
@@ -56,7 +68,7 @@ class calculator {
 
             //add current value to previous
             this.previousOperationText.innerText = `${operationValue} ${operation}`
-            this.currentOperationText = "";
+            this.currentOperationText.innerText = "";
 
         }
     }
