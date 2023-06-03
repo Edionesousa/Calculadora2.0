@@ -21,6 +21,14 @@ class calculator {
     }
     // precess all calculator operation
     processOperation(operation){
+        // check is current is emptu
+        if(this.currentOperationText.innerText === ""){
+            // change opetation
+            if(this.previousOperationText.innerText !== ""){
+                this.chengeOperation(operation);
+            }
+            return;
+        }
         let operationValue
         const previous =+ this.previousOperationText.innerText.split(" ")[0];
         const current =+ this.currentOperationText.innerText
@@ -46,7 +54,6 @@ class calculator {
             return;
         }
 
-
     }
     // change values of the calculator screen
     updateScreen(
@@ -55,8 +62,6 @@ class calculator {
         current = null,
         previous = null
     ){
-
-        console.log(operationValue, operation, current, previous)
 
         if(operationValue === null){
             this.currentOperationText.innerText += this.currentOperation;
@@ -69,8 +74,19 @@ class calculator {
             //add current value to previous
             this.previousOperationText.innerText = `${operationValue} ${operation}`
             this.currentOperationText.innerText = "";
-
         }
+    }
+    //chenge math opretion
+
+    chengeOperation(operation){
+        const  mathOperations = ["*", "/", "+", "-"];
+
+        if(!mathOperations.includes(operation)){
+            return;
+        }
+
+        this.previousOperationText.innerText = 
+        this.previousOperationText.innerText.slice(0, -1) + operation
     }
 }
 const calc = new calculator (previousOperationText, currentOperationText);
