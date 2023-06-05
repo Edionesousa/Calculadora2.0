@@ -50,6 +50,15 @@ class calculator {
                 operationValue = previous * current;
                 this.updateScreen(operationValue, operation, current, previous)
             break;
+            case "DEL":
+                this.processDelOperator();
+            break;
+            case "C":
+                this.processClearOperator();
+            break;
+            case "CE":
+                this.processClearAllOperator();
+            break;
             default:
             return;
         }
@@ -88,8 +97,26 @@ class calculator {
         this.previousOperationText.innerText = 
         this.previousOperationText.innerText.slice(0, -1) + operation
     }
+    // Delete this last digite
+    processDelOperator(del){
+        this.currentOperationText.innerText =
+        this.currentOperationText.innerText.slice(0, -1)
+    }
+    // Delet this clear all operation
+    processClearOperator(){
+        this.currentOperationText.innerText =
+        this.currentOperationText.innerText.slice(0, 0)
+    }
+    processClearAllOperator(){
+        this.currentOperationText.innerText = 
+        this.currentOperationText.innerText.slice(0, 0)
+        this.previousOperationText.innerText =
+        this.previousOperationText.innerText.slice(0, 0)
+    }
+    
 }
 const calc = new calculator (previousOperationText, currentOperationText);
+
 
 buttons.forEach((btn) =>{
     btn.addEventListener("click", (e) =>{
