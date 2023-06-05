@@ -6,7 +6,7 @@ class calculator {
     constructor(previousOperationText, currentOperationText){
         this.previousOperationText = previousOperationText
         this.currentOperationText = currentOperationText
-        this.currentOperation = "";
+        this.currentOperation = ""; 
     }
 
     //add digit to calculator screen
@@ -22,7 +22,7 @@ class calculator {
     // precess all calculator operation
     processOperation(operation){
         // check is current is emptu
-        if(this.currentOperationText.innerText === ""){
+        if(this.currentOperationText.innerText === "" && operation !== "CE"){
             // change opetation
             if(this.previousOperationText.innerText !== ""){
                 this.chengeOperation(operation);
@@ -58,6 +58,9 @@ class calculator {
             break;
             case "CE":
                 this.processClearAllOperator();
+            break;
+            case "=":
+                this.processTotalOperator();
             break;
             default:
             return;
@@ -104,16 +107,17 @@ class calculator {
     }
     // Delet this clear all operation
     processClearOperator(){
-        this.currentOperationText.innerText =
-        this.currentOperationText.innerText.slice(0, 0)
+        this.currentOperationText.innerText = "";
     }
     processClearAllOperator(){
-        this.currentOperationText.innerText = 
-        this.currentOperationText.innerText.slice(0, 0)
-        this.previousOperationText.innerText =
-        this.previousOperationText.innerText.slice(0, 0)
+        this.currentOperationText.innerText = "";
+        this.previousOperationText.innerText = "";
     }
-    
+    processTotalOperator(){
+        const operation =  
+        previousOperationText.innerText.split(" ")[1]
+        this.processOperation(operation)
+    }
 }
 const calc = new calculator (previousOperationText, currentOperationText);
 
